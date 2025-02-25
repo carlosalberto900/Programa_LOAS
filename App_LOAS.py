@@ -78,7 +78,7 @@ if resultado == 2:
                 doc.save(temp_file_path)
 
             st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name="sentenca.docx")
+            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
 
     elif motivo_improcedencia == 2:
         sem_deficiencia = st.radio("Por que não existe deficiência?", [1, 2, 3], format_func=lambda x: "Estado mórbido não impede participação social" if x == 1 else "Impedimento de longo prazo não comprovado" if x == 2 else "Outro motivo")
@@ -109,7 +109,7 @@ if resultado == 2:
                 doc.save(temp_file_path)
 
             st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name="sentenca.docx")
+            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
 
     elif motivo_improcedencia == 3:
         sem_miserabilidade = st.radio("Por que não existe miserabilidade?", [1, 2], format_func=lambda x: "Renda per capita familiar supera o limite legal" if x == 1 else "Outro motivo")
@@ -138,7 +138,7 @@ if resultado == 2:
                 doc.save(temp_file_path)
 
             st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name="sentenca.docx")
+            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
 
 elif resultado == 1:
     tipo_de_loas = st.radio("Trata-se de LOAS Idoso ou LOAS Deficiente?", [1, 2], format_func=lambda x: "Idoso" if x == 1 else "Deficiente")
@@ -182,7 +182,7 @@ elif resultado == 1:
                 doc.save(temp_file_path)
 
             st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name="sentenca.docx")
+            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"[processo].docx")
 
     elif tipo_de_loas == 2:
         deficiencia = st.text_area("Por que a parte autora pode ser considerada deficiente?")
@@ -223,4 +223,4 @@ elif resultado == 1:
                 doc.save(temp_file_path)
 
             st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name="sentenca.docx")# Escreva o seu código aqui :-)
+            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
