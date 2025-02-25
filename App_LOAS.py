@@ -209,7 +209,7 @@ elif resultado == 1:
             doc.add_paragraph(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}")
             doc.add_paragraph(f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado.")
             doc.add_paragraph(f"Quanto à DIB, fixo em {DIB1}. {motivo_DIB1}")
-            doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB1}, no valor de um salário mínimo vigente ao tempo.")
+            doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo.")
             doc.add_paragraph(f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP1}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.")
             doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
             doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
