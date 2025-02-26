@@ -85,7 +85,7 @@ if 'processo_formatado' in locals():
         elif motivo_improcedencia == 2:
             sem_deficiencia = st.radio("Por que não existe deficiência?", [1, 2, 3], format_func=lambda x: "Estado mórbido não impede participação social" if x == 1 else "Impedimento de longo prazo não comprovado" if x == 2 else "Outro motivo")
             if sem_deficiencia == 3:
-                sem_deficiencia_redigido = st.text_area("Redija o motivo pelo qual o requerente não tem deficiência:")
+                sem_deficiencia_redigido = st.text_area("Redija o motivo pelo qual o requerente não tem deficiência (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
@@ -116,7 +116,7 @@ if 'processo_formatado' in locals():
         elif motivo_improcedencia == 3:
             sem_miserabilidade = st.radio("Por que não existe miserabilidade?", [1, 2], format_func=lambda x: "Renda per capita familiar supera o limite legal" if x == 1 else "Outro motivo")
             if sem_miserabilidade == 2:
-                sem_miserabilidade_redigido = st.text_area("Redija o motivo pelo qual o requerente não cumpre o requisito da miserabilidade:")
+                sem_miserabilidade_redigido = st.text_area("Redija o motivo pelo qual o requerente não cumpre o requisito da miserabilidade (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             if st.button("Gerar Sentença"):
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
@@ -151,7 +151,7 @@ if 'processo_formatado' in locals():
             DIB = st.text_input("Qual a DIB do benefício concedido? (Digite no formato dd/mm/aaaa):")
             DIB_na_DER = st.radio("A DIB foi fixada na DER?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
             if DIB_na_DER == 2:
-                motivo_DIB = st.text_area("Explique por que a DIB não foi fixada na DER:")
+                motivo_DIB = st.text_area("Explique por que a DIB não foi fixada na DER (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             else:
                 motivo_DIB = "A DIB deve ser fixada na DER do benefício junto ao INSS."
 
@@ -187,12 +187,12 @@ if 'processo_formatado' in locals():
                 st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"[processo].docx")
 
         elif tipo_de_loas == 2:
-            deficiencia = st.text_area("Por que a parte autora pode ser considerada deficiente?")
-            miserabilidade_presente = st.text_area("Por que a parte autora cumpre o requisito de miserabilidade?")
+            deficiencia = st.text_area("Por que a parte autora pode ser considerada deficiente? (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final)")
+            miserabilidade_presente = st.text_area("Por que a parte autora cumpre o requisito de miserabilidade? (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final)")
             DIB1 = st.text_input("Qual a DIB do benefício concedido? (Digite no formato dd/mm/aaaa):")
             DIB_na_DER1 = st.radio("A DIB foi fixada na DER?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
             if DIB_na_DER1 == 2:
-                motivo_DIB1 = st.text_area("Explique por que a DIB não foi fixada na DER:")
+                motivo_DIB1 = st.text_area("Explique por que a DIB não foi fixada na DER (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             else:
                 motivo_DIB1 = "A DIB deve ser fixada na DER do benefício junto ao INSS."
 
