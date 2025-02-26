@@ -127,7 +127,7 @@ if 'processo_formatado' in locals():
                     if paragrafo.strip():
                         doc.add_paragraph(paragrafo.strip())
                 if sem_miserabilidade == 1:
-                    doc.add_paragraph(f"A perícia social constatou que a renda per capita familiar supera o limite legal que 1/4 do salário-mínimo, e a situação concreta apresentada no laudo demonstra que, apesar das dificuldades enfrentadas, a parte autora possui no necessário para sua manutenção.")
+                    doc.add_paragraph(f"A perícia social constatou que a renda per capita familiar supera o limite legal que 1/4 do salário-mínimo, e a situação concreta apresentada no laudo demonstra que, apesar das dificuldades enfrentadas, a parte autora possui o necessário para sua manutenção.")
                 elif sem_miserabilidade == 2:
                     doc.add_paragraph(f"{sem_miserabilidade_redigido}")
                 doc.add_paragraph(f"Não cumprido um dos requisitos legais, o pedido é improcedente.")
