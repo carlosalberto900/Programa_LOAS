@@ -44,183 +44,183 @@ st.title("PROGRAMA GERADOR DE SENTENÇAS LOAS")
 st.write("Criado por: Carlos Alberto Antonio Junior - Juiz Federal - TRF3")
 
 # Input do número do processo
-processo = st.text_input("Qual o número do processo? (Digite apenas números, 20 dígitos):")
+processo = st.text_input("Qual o número do processo? (Digite apenas números, 20 dígitos, sem . - / #):")
 if processo and len(processo) == 20 and processo.isdigit():
     processo_formatado = f"{processo[:7]}-{processo[7:9]}.{processo[9:13]}.{processo[13:14]}.{processo[14:16]}.{processo[16:]}"
     st.write(f"Processo: {processo_formatado}")
 else:
-    st.error("Formato inválido! O número do processo deve ter 20 dígitos numéricos.")
+    st.error("Formato inválido! O número do processo deve ter 20 dígitos numéricos, sem . - / #.")
 
-# Input do resultado (procedente ou improcedente)
-resultado = st.radio("O pedido é procedente (no todo ou em parte) ou improcedente?", [1, 2], format_func=lambda x: "Procedente" if x == 1 else "Improcedente")
+    # Input do resultado (procedente ou improcedente)
+    resultado = st.radio("O pedido é procedente (no todo ou em parte) ou improcedente?", [1, 2], format_func=lambda x: "Procedente" if x == 1 else "Improcedente")
 
-if resultado == 2:
-    motivo_improcedencia = st.radio("Qual o motivo da improcedência?", [1, 2, 3], format_func=lambda x: "Não tem idade mínima" if x == 1 else "Não apresenta deficiência" if x == 2 else "Não cumpriu o requisito da miserabilidade")
+    if resultado == 2:
+        motivo_improcedencia = st.radio("Qual o motivo da improcedência?", [1, 2, 3], format_func=lambda x: "Não tem idade mínima" if x == 1 else "Não apresenta deficiência" if x == 2 else "Não cumpriu o requisito da miserabilidade")
+    
+        if motivo_improcedencia == 1:
+            idade_insuficiente = st.number_input("Qual a idade do requerente na DER? (Digite apenas números):", min_value=0, max_value=150, step=1)
+            if st.button("Gerar Sentença"):
+                doc = Document()
+                doc.add_paragraph(f"Processo: {processo_formatado}")
+                paragrafos = texto_base.split('\n')
+                for paragrafo in paragrafos:
+                    if paragrafo.strip():
+                        doc.add_paragraph(paragrafo.strip())
+                doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Idoso. Verifica-se que na DER a parte autora possuía {idade_insuficiente} anos de idade, e o benefício exige 65 anos de idade. Não cumprido um dos requisitos legais, o pedido é improcedente.")
+                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
+                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
+                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
+                doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
+                doc.add_paragraph(f"Int.")
+    
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
+                    temp_file_path = temp_file.name
+                    doc.save(temp_file_path)
+    
+                st.success("Sentença gerada com sucesso!")
+                st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
+    
+        elif motivo_improcedencia == 2:
+            sem_deficiencia = st.radio("Por que não existe deficiência?", [1, 2, 3], format_func=lambda x: "Estado mórbido não impede participação social" if x == 1 else "Impedimento de longo prazo não comprovado" if x == 2 else "Outro motivo")
+            if sem_deficiencia == 3:
+                sem_deficiencia_redigido = st.text_area("Redija o motivo pelo qual o requerente não tem deficiência:")
+            if st.button("Gerar Sentença"):
+                doc = Document()
+                doc.add_paragraph(f"Processo: {processo_formatado}")
+                paragrafos = texto_base.split('\n')
+                for paragrafo in paragrafos:
+                    if paragrafo.strip():
+                        doc.add_paragraph(paragrafo.strip())
+                if sem_deficiencia == 1:
+                    doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. Em que pese a perícia tenha constatado que a parte autora é acometida de estado mórbido que a aflige, não se constatou que este estado a impeça de participar da vida social em igualdade de condições.")
+                elif sem_deficiencia == 2:
+                    doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. A lei 8.742/93 considera deficiente somente quem possui impedimento de longo prazo, assim entendido aquele superior a 2 anos, ainda que em prognóstico. A perícia constatou que a parte autora não tem impedimento de longo prazo.")
+                elif sem_deficiencia == 3:
+                    doc.add_paragraph(f"{sem_deficiencia_redigido}")
+                doc.add_paragraph(f"Não cumprido um dos requisitos legais, o pedido é improcedente.")
+                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
+                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
+                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
+                doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
+                doc.add_paragraph(f"Int.")
+    
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
+                    temp_file_path = temp_file.name
+                    doc.save(temp_file_path)
+    
+                st.success("Sentença gerada com sucesso!")
+                st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
+    
+        elif motivo_improcedencia == 3:
+            sem_miserabilidade = st.radio("Por que não existe miserabilidade?", [1, 2], format_func=lambda x: "Renda per capita familiar supera o limite legal" if x == 1 else "Outro motivo")
+            if sem_miserabilidade == 2:
+                sem_miserabilidade_redigido = st.text_area("Redija o motivo pelo qual o requerente não cumpre o requisito da miserabilidade:")
+            if st.button("Gerar Sentença"):
+                doc = Document()
+                doc.add_paragraph(f"Processo: {processo_formatado}")
+                paragrafos = texto_base.split('\n')
+                for paragrafo in paragrafos:
+                    if paragrafo.strip():
+                        doc.add_paragraph(paragrafo.strip())
+                if sem_miserabilidade == 1:
+                    doc.add_paragraph(f"A perícia social constatou que a renda per capita familiar supera o limite legal que 1/4 do salário-mínimo, e a situação concreta apresentada no laudo demonstra que, apesar das dificuldades enfrentadas, a parte autora possui no necessário para sua manutenção.")
+                elif sem_miserabilidade == 2:
+                    doc.add_paragraph(f"{sem_miserabilidade_redigido}")
+                doc.add_paragraph(f"Não cumprido um dos requisitos legais, o pedido é improcedente.")
+                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
+                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
+                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
+                doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
+                doc.add_paragraph(f"Int.")
 
-    if motivo_improcedencia == 1:
-        idade_insuficiente = st.number_input("Qual a idade do requerente na DER? (Digite apenas números):", min_value=0, max_value=150, step=1)
-        if st.button("Gerar Sentença"):
-            doc = Document()
-            doc.add_paragraph(f"Processo: {processo_formatado}")
-            paragrafos = texto_base.split('\n')
-            for paragrafo in paragrafos:
-                if paragrafo.strip():
-                    doc.add_paragraph(paragrafo.strip())
-            doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Idoso. Verifica-se que na DER a parte autora possuía {idade_insuficiente} anos de idade, e o benefício exige 65 anos de idade. Não cumprido um dos requisitos legais, o pedido é improcedente.")
-            doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
-            doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-            doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-            doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
-            doc.add_paragraph(f"Int.")
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
+                    temp_file_path = temp_file.name
+                    doc.save(temp_file_path)
 
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
-                temp_file_path = temp_file.name
-                doc.save(temp_file_path)
+                st.success("Sentença gerada com sucesso!")
+                st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
 
-            st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
+    elif resultado == 1:
+        tipo_de_loas = st.radio("Trata-se de LOAS Idoso ou LOAS Deficiente?", [1, 2], format_func=lambda x: "Idoso" if x == 1 else "Deficiente")
 
-    elif motivo_improcedencia == 2:
-        sem_deficiencia = st.radio("Por que não existe deficiência?", [1, 2, 3], format_func=lambda x: "Estado mórbido não impede participação social" if x == 1 else "Impedimento de longo prazo não comprovado" if x == 2 else "Outro motivo")
-        if sem_deficiencia == 3:
-            sem_deficiencia_redigido = st.text_area("Redija o motivo pelo qual o requerente não tem deficiência:")
-        if st.button("Gerar Sentença"):
-            doc = Document()
-            doc.add_paragraph(f"Processo: {processo_formatado}")
-            paragrafos = texto_base.split('\n')
-            for paragrafo in paragrafos:
-                if paragrafo.strip():
-                    doc.add_paragraph(paragrafo.strip())
-            if sem_deficiencia == 1:
-                doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. Em que pese a perícia tenha constatado que a parte autora é acometida de estado mórbido que a aflige, não se constatou que este estado a impeça de participar da vida social em igualdade de condições.")
-            elif sem_deficiencia == 2:
-                doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. A lei 8.742/93 considera deficiente somente quem possui impedimento de longo prazo, assim entendido aquele superior a 2 anos, ainda que em prognóstico. A perícia constatou que a parte autora não tem impedimento de longo prazo.")
-            elif sem_deficiencia == 3:
-                doc.add_paragraph(f"{sem_deficiencia_redigido}")
-            doc.add_paragraph(f"Não cumprido um dos requisitos legais, o pedido é improcedente.")
-            doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
-            doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-            doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-            doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
-            doc.add_paragraph(f"Int.")
+        if tipo_de_loas == 1:
+            idade_idoso = st.number_input("Qual a idade do requerente na DER? (Digite apenas números):", min_value=0, max_value=150, step=1)
+            miserabilidade_presente = st.text_area("Por que a parte autora cumpre o requisito de miserabilidade?")
+            DIB = st.text_input("Qual a DIB do benefício concedido? (Digite no formato dd/mm/aaaa):")
+            DIB_na_DER = st.radio("A DIB foi fixada na DER?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
+            if DIB_na_DER == 2:
+                motivo_DIB = st.text_area("Explique por que a DIB não foi fixada na DER:")
+            else:
+                motivo_DIB = "A DIB deve ser fixada na DER do benefício junto ao INSS."
 
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
-                temp_file_path = temp_file.name
-                doc.save(temp_file_path)
+            if st.button("Gerar Sentença"):
+                data_atual = datetime.now()
+                DIP = data_atual.strftime("01/%m/%Y")
 
-            st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
+                doc = Document()
+                doc.add_paragraph(f"Processo: {processo_formatado}")
+                paragrafos = texto_base.split('\n')
+                for paragrafo in paragrafos:
+                    if paragrafo.strip():
+                        doc.add_paragraph(paragrafo.strip())
+                doc.add_paragraph(f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Idoso.")
+                doc.add_paragraph(f"A parte autora possuía {idade_idoso} anos de idade no requerimento.")
+                doc.add_paragraph(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}")
+                doc.add_paragraph(f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado.")
+                doc.add_paragraph(f"Quanto à DIB, fixo em {DIB}. {motivo_DIB}")
+                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo.")
+                doc.add_paragraph(f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.")
+                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
+                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
+                doc.add_paragraph(f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP}.")
+                doc.add_paragraph(f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença.")
+                doc.add_paragraph(f"Proceda a Secretaria como necessário.")
+                doc.add_paragraph(f"Int.")
 
-    elif motivo_improcedencia == 3:
-        sem_miserabilidade = st.radio("Por que não existe miserabilidade?", [1, 2], format_func=lambda x: "Renda per capita familiar supera o limite legal" if x == 1 else "Outro motivo")
-        if sem_miserabilidade == 2:
-            sem_miserabilidade_redigido = st.text_area("Redija o motivo pelo qual o requerente não cumpre o requisito da miserabilidade:")
-        if st.button("Gerar Sentença"):
-            doc = Document()
-            doc.add_paragraph(f"Processo: {processo_formatado}")
-            paragrafos = texto_base.split('\n')
-            for paragrafo in paragrafos:
-                if paragrafo.strip():
-                    doc.add_paragraph(paragrafo.strip())
-            if sem_miserabilidade == 1:
-                doc.add_paragraph(f"A perícia social constatou que a renda per capita familiar supera o limite legal que 1/4 do salário-mínimo, e a situação concreta apresentada no laudo demonstra que, apesar das dificuldades enfrentadas, a parte autora possui no necessário para sua manutenção.")
-            elif sem_miserabilidade == 2:
-                doc.add_paragraph(f"{sem_miserabilidade_redigido}")
-            doc.add_paragraph(f"Não cumprido um dos requisitos legais, o pedido é improcedente.")
-            doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
-            doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-            doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-            doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
-            doc.add_paragraph(f"Int.")
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
+                    temp_file_path = temp_file.name
+                    doc.save(temp_file_path)
 
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
-                temp_file_path = temp_file.name
-                doc.save(temp_file_path)
+                st.success("Sentença gerada com sucesso!")
+                st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"[processo].docx")
 
-            st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
+        elif tipo_de_loas == 2:
+            deficiencia = st.text_area("Por que a parte autora pode ser considerada deficiente?")
+            miserabilidade_presente = st.text_area("Por que a parte autora cumpre o requisito de miserabilidade?")
+            DIB1 = st.text_input("Qual a DIB do benefício concedido? (Digite no formato dd/mm/aaaa):")
+            DIB_na_DER1 = st.radio("A DIB foi fixada na DER?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
+            if DIB_na_DER1 == 2:
+                motivo_DIB1 = st.text_area("Explique por que a DIB não foi fixada na DER:")
+            else:
+                motivo_DIB1 = "A DIB deve ser fixada na DER do benefício junto ao INSS."
 
-elif resultado == 1:
-    tipo_de_loas = st.radio("Trata-se de LOAS Idoso ou LOAS Deficiente?", [1, 2], format_func=lambda x: "Idoso" if x == 1 else "Deficiente")
+            if st.button("Gerar Sentença"):
+                data_atual = datetime.now()
+                DIP1 = data_atual.strftime("01/%m/%Y")
 
-    if tipo_de_loas == 1:
-        idade_idoso = st.number_input("Qual a idade do requerente na DER? (Digite apenas números):", min_value=0, max_value=150, step=1)
-        miserabilidade_presente = st.text_area("Por que a parte autora cumpre o requisito de miserabilidade?")
-        DIB = st.text_input("Qual a DIB do benefício concedido? (Digite no formato dd/mm/aaaa):")
-        DIB_na_DER = st.radio("A DIB foi fixada na DER?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
-        if DIB_na_DER == 2:
-            motivo_DIB = st.text_area("Explique por que a DIB não foi fixada na DER:")
-        else:
-            motivo_DIB = "A DIB deve ser fixada na DER do benefício junto ao INSS."
+                doc = Document()
+                doc.add_paragraph(f"Processo: {processo_formatado}")
+                paragrafos = texto_base.split('\n')
+                for paragrafo in paragrafos:
+                    if paragrafo.strip():
+                        doc.add_paragraph(paragrafo.strip())
+                doc.add_paragraph(f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Deficiente.")
+                doc.add_paragraph(f"A parte autora enquadra-se como deficiente nos termos da lei. {deficiencia}")
+                doc.add_paragraph(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}")
+                doc.add_paragraph(f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado.")
+                doc.add_paragraph(f"Quanto à DIB, fixo em {DIB1}. {motivo_DIB1}")
+                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo.")
+                doc.add_paragraph(f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP1}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.")
+                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
+                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
+                doc.add_paragraph(f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP1}.")
+                doc.add_paragraph(f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença.")
+                doc.add_paragraph(f"Proceda a Secretaria como necessário.")
+                doc.add_paragraph(f"Int.")
 
-        if st.button("Gerar Sentença"):
-            data_atual = datetime.now()
-            DIP = data_atual.strftime("01/%m/%Y")
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
+                    temp_file_path = temp_file.name
+                    doc.save(temp_file_path)
 
-            doc = Document()
-            doc.add_paragraph(f"Processo: {processo_formatado}")
-            paragrafos = texto_base.split('\n')
-            for paragrafo in paragrafos:
-                if paragrafo.strip():
-                    doc.add_paragraph(paragrafo.strip())
-            doc.add_paragraph(f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Idoso.")
-            doc.add_paragraph(f"A parte autora possuía {idade_idoso} anos de idade no requerimento.")
-            doc.add_paragraph(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}")
-            doc.add_paragraph(f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado.")
-            doc.add_paragraph(f"Quanto à DIB, fixo em {DIB}. {motivo_DIB}")
-            doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo.")
-            doc.add_paragraph(f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.")
-            doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-            doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-            doc.add_paragraph(f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP}.")
-            doc.add_paragraph(f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença.")
-            doc.add_paragraph(f"Proceda a Secretaria como necessário.")
-            doc.add_paragraph(f"Int.")
-
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
-                temp_file_path = temp_file.name
-                doc.save(temp_file_path)
-
-            st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"[processo].docx")
-
-    elif tipo_de_loas == 2:
-        deficiencia = st.text_area("Por que a parte autora pode ser considerada deficiente?")
-        miserabilidade_presente = st.text_area("Por que a parte autora cumpre o requisito de miserabilidade?")
-        DIB1 = st.text_input("Qual a DIB do benefício concedido? (Digite no formato dd/mm/aaaa):")
-        DIB_na_DER1 = st.radio("A DIB foi fixada na DER?", [1, 2], format_func=lambda x: "Sim" if x == 1 else "Não")
-        if DIB_na_DER1 == 2:
-            motivo_DIB1 = st.text_area("Explique por que a DIB não foi fixada na DER:")
-        else:
-            motivo_DIB1 = "A DIB deve ser fixada na DER do benefício junto ao INSS."
-
-        if st.button("Gerar Sentença"):
-            data_atual = datetime.now()
-            DIP1 = data_atual.strftime("01/%m/%Y")
-
-            doc = Document()
-            doc.add_paragraph(f"Processo: {processo_formatado}")
-            paragrafos = texto_base.split('\n')
-            for paragrafo in paragrafos:
-                if paragrafo.strip():
-                    doc.add_paragraph(paragrafo.strip())
-            doc.add_paragraph(f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Deficiente.")
-            doc.add_paragraph(f"A parte autora enquadra-se como deficiente nos termos da lei. {deficiencia}")
-            doc.add_paragraph(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}")
-            doc.add_paragraph(f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado.")
-            doc.add_paragraph(f"Quanto à DIB, fixo em {DIB1}. {motivo_DIB1}")
-            doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo.")
-            doc.add_paragraph(f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP1}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.")
-            doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-            doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-            doc.add_paragraph(f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP1}.")
-            doc.add_paragraph(f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença.")
-            doc.add_paragraph(f"Proceda a Secretaria como necessário.")
-            doc.add_paragraph(f"Int.")
-
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
-                temp_file_path = temp_file.name
-                doc.save(temp_file_path)
-
-            st.success("Sentença gerada com sucesso!")
-            st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
+                st.success("Sentença gerada com sucesso!")
+                st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
