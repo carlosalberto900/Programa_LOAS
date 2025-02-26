@@ -42,6 +42,8 @@ Assim é que, ao Juízo, é lícito analisar o cumprimento dos requisitos para c
 # Interface gráfica com Streamlit
 st.title("PROGRAMA GERADOR DE SENTENÇAS LOAS")
 st.write("Criado por: Carlos Alberto Antonio Junior - Juiz Federal - TRF3")
+st.write("1 Vara Federal em Caraguatatuba/SP")
+
 
 # Input do processo
 processo = st.text_input("Qual o número do processo? (Digite apenas números, 20 dígitos, sem . - / #):")
