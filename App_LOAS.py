@@ -43,13 +43,15 @@ Assim é que, ao Juízo, é lícito analisar o cumprimento dos requisitos para c
 st.title("PROGRAMA GERADOR DE SENTENÇAS LOAS")
 st.write("Criado por: Carlos Alberto Antonio Junior - Juiz Federal - TRF3")
 
-# Input do número do processo
+# Input do processo
 processo = st.text_input("Qual o número do processo? (Digite apenas números, 20 dígitos, sem . - / #):")
 if processo and len(processo) == 20 and processo.isdigit():
     processo_formatado = f"{processo[:7]}-{processo[7:9]}.{processo[9:13]}.{processo[13:14]}.{processo[14:16]}.{processo[16:]}"
-    st.write(f"Processo: {processo_formatado}")
 else:
     st.error("Formato inválido! O número do processo deve ter 20 dígitos numéricos, sem . - / #.")
+
+if 'processo_formatado' in locals():
+    st.write(f"Processo: {processo_formatado}")
 
     # Input do resultado (procedente ou improcedente)
     resultado = st.radio("O pedido é procedente (no todo ou em parte) ou improcedente?", [1, 2], format_func=lambda x: "Procedente" if x == 1 else "Improcedente")
