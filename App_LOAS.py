@@ -186,7 +186,7 @@ if 'processo_formatado' in locals():
                     doc.save(temp_file_path)
 
                 st.success("Sentença gerada com sucesso!")
-                st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"[processo].docx")
+                st.download_button("Baixar Sentença", open(temp_file_path, "rb").read(), file_name=f"{processo}.docx")
 
         elif tipo_de_loas == 2:
             deficiencia = st.text_area("Por que a parte autora pode ser considerada deficiente? (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final)")
