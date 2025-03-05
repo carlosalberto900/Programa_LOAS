@@ -9,7 +9,6 @@ import platform
 import streamlit as st
 
 def texto_base():
-    
     fundamento_base = [
             (f"Vistos."),
             (f"Trata-se de pedido de benefício de prestação continuada."),
