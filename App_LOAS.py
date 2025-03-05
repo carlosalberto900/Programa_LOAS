@@ -81,12 +81,18 @@ if 'processo_formatado' in locals():
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
                 texto_base()
-                doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Idoso. Verifica-se que na DER a parte autora possuía {idade_insuficiente} anos de idade, e o benefício exige 65 anos de idade. Não cumprido um dos requisitos legais, o pedido é improcedente.")
-                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
-                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-                doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
-                doc.add_paragraph(f"Int.")
+                fundamento_improcedencia1 = [
+                    (f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Idoso. Verifica-se que na DER a parte autora possuía {idade_insuficiente} anos de idade, e o benefício exige 65 anos de idade. Não cumprido um dos requisitos legais, o pedido é improcedente."),
+                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido."),
+                    (f"Sem condenação em honorários nesta instância."),
+                    (f"Defiro os benefícios da gratuidade."),
+                    (f"Com o trânsito em julgado, arquivem-se oportunamente."),
+                    (f"Int."),
+                ]
+                for n in fundamento_improcedencia1:
+                    parag = doc.add_paragraph(n)
+                    parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    parag.paragraph_format.first_line_indent = Cm(2)
     
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
                     temp_file_path = temp_file.name
@@ -104,17 +110,30 @@ if 'processo_formatado' in locals():
                 doc.add_paragraph(f"Processo: {processo_formatado}")
                 texto_base()
                 if sem_deficiencia == 1:
-                    doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. Em que pese a perícia tenha constatado que a parte autora é acometida de estado mórbido que a aflige, não se constatou que este estado a impeça de participar da vida social em igualdade de condições.")
+                    semdef1 = doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. Em que pese a perícia tenha constatado que a parte autora é acometida de estado mórbido que a aflige, não se constatou que este estado a impeça de participar da vida social em igualdade de condições.")
+                    semdef1.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    semdef1.paragraph_format.first_line_indent = Cm(2)
                 elif sem_deficiencia == 2:
-                    doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. A lei 8.742/93 considera deficiente somente quem possui impedimento de longo prazo, assim entendido aquele superior a 2 anos, ainda que em prognóstico. A perícia constatou que a parte autora não tem impedimento de longo prazo.")
+                    semdef2 = doc.add_paragraph(f"No caso dos autos trata-se de pedido de benefício de prestação continuada (LOAS) - Deficiente. A lei 8.742/93 considera deficiente somente quem possui impedimento de longo prazo, assim entendido aquele superior a 2 anos, ainda que em prognóstico. A perícia constatou que a parte autora não tem impedimento de longo prazo.")
+                    semdef2.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    semdef2.paragraph_format.first_line_indent = Cm(2)
                 elif sem_deficiencia == 3:
-                    doc.add_paragraph(f"{sem_deficiencia_redigido}")
-                doc.add_paragraph(f"Não cumprido um dos requisitos legais, o pedido é improcedente.")
-                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
-                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-                doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
-                doc.add_paragraph(f"Int.")
+                    semdef3 = doc.add_paragraph(f"{sem_deficiencia_redigido}")
+                    semdef3.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    semdef3.paragraph_format.first_line_indent = Cm(2)
+                    
+                fundamento_improcedencia2 = [
+                    (f"Não cumprido um dos requisitos legais, o pedido é improcedente."),
+                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido."),
+                    (f"Sem condenação em honorários nesta instância."),
+                    (f"Defiro os benefícios da gratuidade."),
+                    (f"Com o trânsito em julgado, arquivem-se oportunamente."),
+                    (f"Int."),
+                    ]
+                for n in fundamento_improcedencia2:
+                    parag = doc.add_paragraph(n)
+                    parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    parag.paragraph_format.first_line_indent = Cm(2)
     
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
                     temp_file_path = temp_file.name
@@ -132,15 +151,26 @@ if 'processo_formatado' in locals():
                 doc.add_paragraph(f"Processo: {processo_formatado}")
                 texto_base()
                 if sem_miserabilidade == 1:
-                    doc.add_paragraph(f"A perícia social constatou que a renda per capita familiar supera o limite legal que 1/4 do salário-mínimo, e a situação concreta apresentada no laudo demonstra que, apesar das dificuldades enfrentadas, a parte autora possui o necessário para sua manutenção.")
+                    semmiseria1 = doc.add_paragraph(f"A perícia social constatou que a renda per capita familiar supera o limite legal que 1/4 do salário-mínimo, e a situação concreta apresentada no laudo demonstra que, apesar das dificuldades enfrentadas, a parte autora possui o necessário para sua manutenção.")
+                    semmiseria1.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    semmiseria1.paragraph_format.first_line_indent = Cm(2)
                 elif sem_miserabilidade == 2:
-                    doc.add_paragraph(f"{sem_miserabilidade_redigido}")
-                doc.add_paragraph(f"Não cumprido um dos requisitos legais, o pedido é improcedente.")
-                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido.")
-                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-                doc.add_paragraph(f"Com o trânsito em julgado, arquivem-se oportunamente.")
-                doc.add_paragraph(f"Int.")
+                    semmiseria2 = doc.add_paragraph(f"{sem_miserabilidade_redigido}")
+                    semmiseria2.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    semmiseria2.paragraph_format.first_line_indent = Cm(2)
+                    
+                fundamento_improcedencia3 = [
+                    (f"Não cumprido um dos requisitos legais, o pedido é improcedente."),
+                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO IMPROCEDENTE o pedido."),
+                    (f"Sem condenação em honorários nesta instância."),
+                    (f"Defiro os benefícios da gratuidade."),
+                    (f"Com o trânsito em julgado, arquivem-se oportunamente."),
+                    (f"Int."),
+                    ]
+                for n in fundamento_improcedencia2:
+                    parag = doc.add_paragraph(n)
+                    parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    parag.paragraph_format.first_line_indent = Cm(2)
 
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
                     temp_file_path = temp_file.name
@@ -169,20 +199,26 @@ if 'processo_formatado' in locals():
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
                 texto_base()
-                doc.add_paragraph(f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Idoso.")
-                doc.add_paragraph(f"A parte autora possuía {idade_idoso} anos de idade no requerimento.")
-                doc.add_paragraph(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}")
-                doc.add_paragraph(f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado.")
-                doc.add_paragraph(f"Quanto à DIB, fixo em {DIB}. {motivo_DIB}")
-                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo.")
-                doc.add_paragraph(f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.")
-                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-                doc.add_paragraph(f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP}.")
-                doc.add_paragraph(f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença.")
-                doc.add_paragraph(f"Proceda a Secretaria como necessário.")
-                doc.add_paragraph(f"Int.")
-
+                fundamento_procedencia1 = [
+                    (f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Idoso."),
+                    (f"A parte autora possuía {idade_idoso} anos de idade no requerimento."),
+                    (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}"),
+                    (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
+                    (f"Quanto à DIB, fixo em {DIB}. {motivo_DIB}"),
+                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo."),
+                    (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
+                    (f"Sem condenação em honorários nesta instância."),
+                    (f"Defiro os benefícios da gratuidade."),
+                    (f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP}."),
+                    (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
+                    (f"Proceda a Secretaria como necessário."),
+                    (f"Int."),
+                    ]
+                for n in fundamento_procedencia1:
+                    parag = doc.add_paragraph(n)
+                    parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    parag.paragraph_format.first_line_indent = Cm(2)
+              
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
                     temp_file_path = temp_file.name
                     doc.save(temp_file_path)
@@ -207,19 +243,25 @@ if 'processo_formatado' in locals():
                 doc = Document()
                 doc.add_paragraph(f"Processo: {processo_formatado}")
                 texto_base()
-                doc.add_paragraph(f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Deficiente.")
-                doc.add_paragraph(f"A parte autora enquadra-se como deficiente nos termos da lei. {deficiencia}")
-                doc.add_paragraph(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}")
-                doc.add_paragraph(f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado.")
-                doc.add_paragraph(f"Quanto à DIB, fixo em {DIB1}. {motivo_DIB1}")
-                doc.add_paragraph(f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo.")
-                doc.add_paragraph(f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP1}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença.")
-                doc.add_paragraph(f"Sem condenação em honorários nesta instância.")
-                doc.add_paragraph(f"Defiro os benefícios da gratuidade.")
-                doc.add_paragraph(f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP1}.")
-                doc.add_paragraph(f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença.")
-                doc.add_paragraph(f"Proceda a Secretaria como necessário.")
-                doc.add_paragraph(f"Int.")
+                fundamento_procedencia2 = [
+                    (f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Deficiente."),
+                    (f"A parte autora enquadra-se como deficiente nos termos da lei. {deficiencia}"),
+                    (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}"),
+                    (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
+                    (f"Quanto à DIB, fixo em {DIB1}. {motivo_DIB1}"),
+                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo."),
+                    (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP1}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
+                    (f"Sem condenação em honorários nesta instância."),
+                    (f"Defiro os benefícios da gratuidade."),
+                    (f"Diante da certeza do direito, e do fundado receio de dano de difícil reparação ao autor, que comprovadamente necessita desta verba de natureza alimentar, CONCEDO A ANTECIPAÇÃO DE TUTELA para determinar a implantação do benefício no prazo de até 60 dias, com DIP em {DIP1}."),
+                    (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
+                    (f"Proceda a Secretaria como necessário."),
+                    (f"Int."),
+                    ]
+                for n in fundamento_procedencia2:
+                    parag = doc.add_paragraph(n)
+                    parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    parag.paragraph_format.first_line_indent = Cm(2)                
 
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as temp_file:
                     temp_file_path = temp_file.name
