@@ -167,7 +167,7 @@ if 'processo_formatado' in locals():
                     (f"Com o trânsito em julgado, arquivem-se oportunamente."),
                     (f"Int."),
                     ]
-                for n in fundamento_improcedencia2:
+                for n in fundamento_improcedencia3:
                     parag = doc.add_paragraph(n)
                     parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                     parag.paragraph_format.first_line_indent = Cm(2)
