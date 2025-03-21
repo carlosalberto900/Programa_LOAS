@@ -199,7 +199,7 @@ if 'processo_formatado' in locals():
                 motivo_DIB = "A DIB deve ser fixada na DER do benefício junto ao INSS."
             procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
             if procedencia_total_parcial == 1:
-                resultado_dispositivo = None
+                resultado_dispositivo = ""
             else:
                 resultado_dispositivo = "EM PARTE "
 
@@ -250,7 +250,7 @@ if 'processo_formatado' in locals():
                 motivo_DIB1 = "A DIB deve ser fixada na DER do benefício junto ao INSS."
             procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
             if procedencia_total_parcial == 1:
-                resultado_dispositivo = None
+                resultado_dispositivo = ""
             else:
                 resultado_dispositivo = "EM PARTE "
 
