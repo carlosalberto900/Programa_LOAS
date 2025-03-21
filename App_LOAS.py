@@ -197,7 +197,7 @@ if 'processo_formatado' in locals():
                 motivo_DIB = st.text_area("Explique por que a DIB não foi fixada na DER (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             else:
                 motivo_DIB = "A DIB deve ser fixada na DER do benefício junto ao INSS."
-            procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
+            procedencia_total_parcial = st.radio("Para fins da redação do dispositivo da sentença, a procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
             if procedencia_total_parcial == 1:
                 resultado_dispositivo = ""
             else:
@@ -248,7 +248,7 @@ if 'processo_formatado' in locals():
                 motivo_DIB1 = st.text_area("Explique por que a DIB não foi fixada na DER (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             else:
                 motivo_DIB1 = "A DIB deve ser fixada na DER do benefício junto ao INSS."
-            procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
+            procedencia_total_parcial = st.radio("Para fins da redação do dispositivo da sentença, a procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
             if procedencia_total_parcial == 1:
                 resultado_dispositivo = ""
             else:
