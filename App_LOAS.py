@@ -197,7 +197,11 @@ if 'processo_formatado' in locals():
                 motivo_DIB = st.text_area("Explique por que a DIB não foi fixada na DER (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             else:
                 motivo_DIB = "A DIB deve ser fixada na DER do benefício junto ao INSS."
-            procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: None if x == 1 else "EM PARTE ")
+            procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
+            if procedencia_total_parcial == 1:
+                resultado_dispositivo = None
+            else:
+                resultado_dispositivo = "EM PARTE "
 
             if st.button("Gerar Sentença"):
                 data_atual = datetime.now()
@@ -212,7 +216,7 @@ if 'processo_formatado' in locals():
                     (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}"),
                     (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
                     (f"Quanto à DIB, fixo em {DIB}. {motivo_DIB}"),
-                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE {procedencia_total_parcial}o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo."),
+                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE {resultado_dispositivo}o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo."),
                     (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
                     (f"Sem condenação em honorários nesta instância."),
                     (f"Defiro os benefícios da gratuidade."),
@@ -244,7 +248,11 @@ if 'processo_formatado' in locals():
                 motivo_DIB1 = st.text_area("Explique por que a DIB não foi fixada na DER (será inserido como parágrafo na sentença - iniciar com letra maiúscula e colocar ponto final):")
             else:
                 motivo_DIB1 = "A DIB deve ser fixada na DER do benefício junto ao INSS."
-            procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: None if x == 1 else "EM PARTE ")
+            procedencia_total_parcial = st.radio("A procedência foi total ou parcial?", [1, 2], format_func=lambda x: "Total" if x == 1 else "Parcial")
+            if procedencia_total_parcial == 1:
+                resultado_dispositivo = None
+            else:
+                resultado_dispositivo = "EM PARTE "
 
             if st.button("Gerar Sentença"):
                 data_atual = datetime.now()
@@ -259,7 +267,7 @@ if 'processo_formatado' in locals():
                     (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}"),
                     (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
                     (f"Quanto à DIB, fixo em {DIB1}. {motivo_DIB1}"),
-                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE {procedencia_total_parcial}o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo."),
+                    (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE {resultado_dispositivo}o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo."),
                     (f"Condeno o INSS ao pagamento dos atrasados devidos desde a DIB fixada, até a DIP em {DIP1}, atualizados desde cada competência devida e com juros desde a propositura da demanda, pelos índices e percentuais do Manual de Cálculos da Justiça Federal, a ser apurado em cumprimento invertido de sentença."),
                     (f"Sem condenação em honorários nesta instância."),
                     (f"Defiro os benefícios da gratuidade."),
