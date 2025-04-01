@@ -217,7 +217,14 @@ if 'processo_formatado' in locals():
                 fundamento_procedencia1 = [
                     (f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Idoso."),
                     (f"A parte autora possuía {idade_idoso} anos de idade no requerimento."),
-                    (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}"),
+                    (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.)
+                    ]
+
+                    for linha in miserabilidade_presente.split("\n")
+                        if linha.split():
+                            fundamento_procedencia2.append(linha)
+
+                    fundamento_procedencia1.extend([
                     (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
                     (f"Quanto à DIB, fixo em {DIB}. {motivo_DIB}"),
                     (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE {resultado_dispositivo}o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo."),
@@ -230,7 +237,7 @@ if 'processo_formatado' in locals():
                     (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
                     (f"Proceda a Secretaria como necessário."),
                     (f"Int."),
-                    ]
+                    ])_
                 for n in fundamento_procedencia1:
                     parag = doc.add_paragraph(n)
                     parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
@@ -267,8 +274,20 @@ if 'processo_formatado' in locals():
                 texto_base()
                 fundamento_procedencia2 = [
                     (f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Deficiente."),
-                    (f"A parte autora enquadra-se como deficiente nos termos da lei. {deficiencia}"),
-                    (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido. {miserabilidade_presente}"),
+                    (f"A parte autora enquadra-se como deficiente nos termos da lei.),
+                    ]
+
+                for linha in deficiencia.split("\n"):
+                    if linha.split():
+                        fundamento_procedencia2.append(linha)
+
+                fundamento_procedencia2.append(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.)
+                
+                for linha in miserabilidade_presente.split("\n")
+                    if linha.split():
+                        fundamento_procedencia2.append(linha)
+
+                fundamento_procedencia2.extend([
                     (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
                     (f"Quanto à DIB, fixo em {DIB1}. {motivo_DIB1}"),
                     (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE {resultado_dispositivo}o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Deficiente, desde {DIB1}, no valor de um salário mínimo vigente ao tempo."),
@@ -281,7 +300,7 @@ if 'processo_formatado' in locals():
                     (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
                     (f"Proceda a Secretaria como necessário."),
                     (f"Int."),
-                    ]
+                    ])
                 for n in fundamento_procedencia2:
                     parag = doc.add_paragraph(n)
                     parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
