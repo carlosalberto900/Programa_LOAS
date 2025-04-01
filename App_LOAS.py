@@ -237,7 +237,7 @@ if 'processo_formatado' in locals():
                     (f"Com o trânsito em julgado, implantado o benefício, dê-se início ao cumprimento de sentença."),
                     (f"Proceda a Secretaria como necessário."),
                     (f"Int."),
-                    ])_
+                    ])
                 for n in fundamento_procedencia1:
                     parag = doc.add_paragraph(n)
                     parag.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
