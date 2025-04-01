@@ -120,9 +120,11 @@ if 'processo_formatado' in locals():
                     semdef2.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                     semdef2.paragraph_format.first_line_indent = Cm(2)
                 elif sem_deficiencia == 3:
-                    semdef3 = doc.add_paragraph(f"{sem_deficiencia_redigido}")
-                    semdef3.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
-                    semdef3.paragraph_format.first_line_indent = Cm(2)
+                    for linha in sem_deficiencia_redigido.split("\n"):
+                        if linha.strip():
+                            semdef3 = doc.add_paragraph(linha)
+                            semdef3.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                            semdef3.paragraph_format.first_line_indent = Cm(2)
                     
                 fundamento_improcedencia2 = [
                     (f"Não cumprido um dos requisitos legais, o pedido é improcedente."),
@@ -159,9 +161,11 @@ if 'processo_formatado' in locals():
                     semmiseria1.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                     semmiseria1.paragraph_format.first_line_indent = Cm(2)
                 elif sem_miserabilidade == 2:
-                    semmiseria2 = doc.add_paragraph(f"{sem_miserabilidade_redigido}")
-                    semmiseria2.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
-                    semmiseria2.paragraph_format.first_line_indent = Cm(2)
+                    for linha in sem_miserabilidade_redigido.split("\n"):
+                        if linha.split():
+                            semmiseria2 = doc.add_paragraph(linha)
+                            semmiseria2.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                            semmiseria2.paragraph_format.first_line_indent = Cm(2)
                     
                 fundamento_improcedencia3 = [
                     (f"Não cumprido um dos requisitos legais, o pedido é improcedente."),
