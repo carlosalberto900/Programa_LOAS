@@ -224,7 +224,7 @@ if 'processo_formatado' in locals():
                     if linha.split():
                         fundamento_procedencia1.append(linha)
 
-                    fundamento_procedencia1.extend([
+                fundamento_procedencia1.extend([
                     (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
                     (f"Quanto à DIB, fixo em {DIB}. {motivo_DIB}"),
                     (f"Isto posto, com resolução de mérito nos termos do art. 487, I, do CPC, JULGO PROCEDENTE {resultado_dispositivo}o pedido para condenar o réu a conceder a parte autora o benefício de prestação continuada – LOAS  Idoso, desde {DIB}, no valor de um salário mínimo vigente ao tempo."),
