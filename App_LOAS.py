@@ -220,7 +220,7 @@ if 'processo_formatado' in locals():
                     (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.")
                     ]
 
-                for linha in miserabilidade_presente.split("\n")
+                for linha in miserabilidade_presente.split("\n"):
                     if linha.split():
                         fundamento_procedencia2.append(linha)
 
@@ -283,7 +283,7 @@ if 'processo_formatado' in locals():
 
                 fundamento_procedencia2.append(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.")
                 
-                for linha in miserabilidade_presente.split("\n")
+                for linha in miserabilidade_presente.split("\n"):
                     if linha.split():
                         fundamento_procedencia2.append(linha)
 
