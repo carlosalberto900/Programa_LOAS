@@ -120,7 +120,9 @@ if 'processo_formatado' in locals():
                     semdef2.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                     semdef2.paragraph_format.first_line_indent = Cm(2)
                 elif sem_deficiencia == 3:
-                    doc.add_paragraph(f"A parte autora não comprova a existência de deficiência no caso concreto.")
+                    semdef31 = doc.add_paragraph(f"A parte autora não comprova a existência de deficiência no caso concreto.")
+                    semdef31.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    semdef31.paragraph_format.first_line_indent = Cm(2)
                     for linha in sem_deficiencia_redigido.split("\n"):
                         if linha.strip():
                             semdef3 = doc.add_paragraph(linha)
@@ -162,7 +164,9 @@ if 'processo_formatado' in locals():
                     semmiseria1.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
                     semmiseria1.paragraph_format.first_line_indent = Cm(2)
                 elif sem_miserabilidade == 2:
-                    doc.add_paragraph(f"A parte autora não comprova a existência de miserabilidade no caso concreto.")
+                    semmiseria21 = doc.add_paragraph(f"A parte autora não comprova a existência de miserabilidade no caso concreto.")
+                    semmiseria21.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
+                    semmiseria21.paragraph_format.first_line_indent = Cm(2)
                     for linha in sem_miserabilidade_redigido.split("\n"):
                         if linha.split():
                             semmiseria2 = doc.add_paragraph(linha)
