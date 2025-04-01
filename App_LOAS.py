@@ -217,7 +217,7 @@ if 'processo_formatado' in locals():
                 fundamento_procedencia1 = [
                     (f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Idoso."),
                     (f"A parte autora possuía {idade_idoso} anos de idade no requerimento."),
-                    (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.)
+                    (f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.")
                     ]
 
                     for linha in miserabilidade_presente.split("\n")
@@ -274,14 +274,14 @@ if 'processo_formatado' in locals():
                 texto_base()
                 fundamento_procedencia2 = [
                     (f"No presente caso, trata-se de pedido de benefício de prestação continuada - LOAS - Deficiente."),
-                    (f"A parte autora enquadra-se como deficiente nos termos da lei.),
+                    (f"A parte autora enquadra-se como deficiente nos termos da lei."),
                     ]
 
                 for linha in deficiencia.split("\n"):
                     if linha.split():
                         fundamento_procedencia2.append(linha)
 
-                fundamento_procedencia2.append(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.)
+                fundamento_procedencia2.append(f"Para comprovação da situação econômica foi realizada perícia socioeconômica, onde se vê que o requisito de miserabilidade foi cumprido.")
                 
                 for linha in miserabilidade_presente.split("\n")
                     if linha.split():
