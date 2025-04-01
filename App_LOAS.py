@@ -222,7 +222,7 @@ if 'processo_formatado' in locals():
 
                 for linha in miserabilidade_presente.split("\n"):
                     if linha.split():
-                        fundamento_procedencia2.append(linha)
+                        fundamento_procedencia1.append(linha)
 
                     fundamento_procedencia1.extend([
                     (f"Tendo em vista este quadro, e o posicionamento jurisprudencial, entendo que está comprovada a miserabilidade a que se refere a Constituição Federal para garantir ao autor o benefício pleiteado."),
