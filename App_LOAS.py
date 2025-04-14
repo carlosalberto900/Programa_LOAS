@@ -60,11 +60,14 @@ st.write("1 Vara Federal em Caraguatatuba/SP")
 
 
 # Input do processo
-processo = st.text_input("Qual o número do processo? (Digite apenas números, 20 dígitos, sem . - / #):")
-if processo and len(processo) == 20 and processo.isdigit():
-    processo_formatado = f"{processo[:7]}-{processo[7:9]}.{processo[9:13]}.{processo[13:14]}.{processo[14:16]}.{processo[16:]}"
-else:
-    st.error("Formato inválido! O número do processo deve ter 20 dígitos numéricos, sem . - / #.")
+processo = st.text_input("Qual o número do processo? O número do processo contém 20 dígitos numéricos.")
+if processo:
+    processo_limpo = "".join(filter(str.isdigit, processo))
+    if len(processo_limpo) == 20:
+        processo_formatado = f"{processo_limpo[:7]}-{processo_limpo[7:9]}.{processo_limpo[9:13]}.{processo_limpo[13:14]}.{processo_limpo[14:16]}.{processo_limpo[16:]}"
+
+    else:
+        st.error("Formato inválido! O número do processo deve ter 20 dígitos numéricos, após remoção de caracteres especiais.")
 
 if 'processo_formatado' in locals():
     st.write(f"Processo: {processo_formatado}")
